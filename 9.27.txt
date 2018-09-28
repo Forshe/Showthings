@@ -1,0 +1,20 @@
+public class B{
+   public static void main(String[] args){
+       Integer x = new Integer(1);
+       System.out.println(x);
+       test(x);
+       System.out.println(x);
+       
+   }
+   
+   static void test(Integer a){
+      a = new Integer(2);
+   }
+}
+
+  理解这里的关键是区分对象和引用。 这里声明的x是一个引用，而不是一个对象（只是Java把它设计为看上去好像是对象一样）。这个引用它指向了一个对象，这个对象就是后面用new关键字生成的对象。因此，可以说x指向了一个Integer对象。
+  在调用test方法的时候，程序将x作为参数传递给test方法了。这里仍然是值传递，在test调用过程中，会产生一份新的引用(不妨叫做y)。此时，x和y指向了同一个对象。
+   x和y指向的是同一个对象， 由于Java的设计，我们可以通过操作引用来达到操作对象的目的。因此，如果我们此时使用y来修改对象的属性 (例如，y.someField++); 你可以看到x指向的对象同时也被修改到了。
+   另一方面，如果我们让y指向另外一个对象， y=new Integer(2); 此时x和y就指向了不同的
+对象。y修改了它指向的对象的属性，很显然不会影响到x指向的对象。
+
