@@ -1,0 +1,188 @@
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
+public class people {
+	String name;
+	public int year;
+	public int month;
+	public int day;
+	public int salary;
+	public void birthday()
+	{
+		Scanner cin=new Scanner(System.in);
+		System.out.println("Please input the year:");
+		year=cin.nextInt();
+		System.out.println("Please input the month:");
+		month=cin.nextInt();
+		System.out.println("Please input the day:");
+		day=cin.nextInt();
+	}
+	//public int Salary()
+	//{
+	//	Scanner cin=new Scanner(System.in);
+	//	int salary;
+	//	salary=cin.nextInt();
+	//	return 0;
+	//}
+}
+
+class worker extends people{
+	HashSet<worker> workerlist = new HashSet<>();
+	int moneymonth;
+	public int Salary() {
+	Scanner cin=new Scanner(System.in);
+	System.out.println("Please input the salary for the worker");
+	salary=cin.nextInt();
+	return 0;
+	}
+}
+
+
+class manager extends people{
+	HashSet<manager> managerlist = new HashSet<>();
+	int moneymonth;
+	int bonus;
+	public int Salary() {
+		Scanner cin=new Scanner(System.in);
+		System.out.println("Please input the salary for the manager");
+		salary=cin.nextInt();
+		System.out.println("Please input the bonus for the manager");
+		bonus=cin.nextInt();
+		return 0;
+	}	
+}
+
+
+class stockholder extends people{
+	HashSet<stockholder> stockholderlist = new HashSet<>();
+	int stockmoney;
+}
+
+
+class management{
+	public static void main(String args[]) {
+		int Cprofit=10000000+(int)(Math.random()*10000000);
+		System.out.println("This is company's profit:"+Cprofit);
+		Scanner cin=new Scanner(System.in);
+		System.out.println("Welcome to the salary system:");
+		System.out.println("If you want to pay the salary,please input 1");
+		System.out.println("If you want to inquiry some of worker,please input 2");
+		System.out.println("If you want to inquiry all people,please input 3");
+		int a;
+		do {
+			a = cin.nextInt();
+		switch(a) 
+		{
+		case 1:{
+			System.out.println("If you want to pay for the worker,please input 1");
+			System.out.println("If you want to pay for the manager,please input 2");
+			System.out.println("If you want to pay for the stockholder,please input 3");
+			System.out.println("If you want to return,please input 4");
+			int b;
+			do{
+				b=cin.nextInt();
+				switch(b)
+				{
+				case 1:{
+					System.out.println("Please input the number of the worker");
+					int c=cin.nextInt();
+					worker []number=new worker[c];
+				    for(int i = 0; i < c; i++)
+				    {	number[i]=new worker();
+						System.out.println("Please input the name of the worker");
+				    	number[i].name=cin.next();
+				    	number[i].birthday();	
+				    	System.out.println("Please input the month of salary");
+				    	number[i].moneymonth=cin.nextInt();
+				    	number[i].Salary();
+				    	if(number[i].moneymonth==number[i].month)
+					    	System.out.println("It is worker's birthday,please prepare gift");
+				    	number[i].workerlist.add(number[i]);
+				    }
+					System.out.println("If you want to pay for the manager,please input 2");
+					System.out.println("If you want to pay for the stockholder,please input 3");
+					System.out.println("If you exist,please input 4");
+				};break;
+				case 2:{
+					System.out.println("Please input the number of the manger");
+					int d=cin.nextInt();
+					manager []number=new manager[d];
+				    for(int i = 0; i < d; i++)
+				    {
+				    	number[i]=new manager();
+						System.out.println("Please input the name of the manager");
+						number[i].name=cin.next();
+						number[i].birthday();	
+				    	System.out.println("Please input the month of salary");
+				    	number[i].moneymonth=cin.nextInt();
+				    	number[i].Salary();
+				    	number[i].managerlist.add(number[i]);
+						System.out.println("If you want to pay for the stockholder,please input 3");
+						System.out.println("If you exist,please input 4");
+				    }
+				};break;
+				case 3:{
+					System.out.println("Please input the number of the stockholder:");
+					int e=cin.nextInt();
+					worker A=new worker();
+					manager B=new manager();
+					stockholder C=new stockholder();
+					int workersalary=0;
+					int managersalary=0;
+					int managerbonus=0;
+					for(int i=0;i<A.workerlist.size();i++)
+					{
+						workersalary+=A.salary;
+					}
+					for(int i=0;i<B.managerlist.size();i++)
+					{
+						managersalary+=B.salary;
+						managerbonus+=B.bonus;
+					}
+					C.stockmoney=(Cprofit-workersalary*12-managersalary*12-managerbonus*12)/e/10;
+					System.out.println("股东工资："+C.stockmoney);	
+				};break;
+				case 4:break;
+				default:System.out.println("ERROR!");break;
+				}
+			}while(b!=4);
+		};break;
+		case 2:{
+			worker A=new worker();
+			System.out.println("Please input the name of the worker");
+			String na=cin.next();
+			if(na==A.name)
+			{
+				System.out.println(A.name+"		"+A.salary+"	"+A.moneymonth);
+			}
+			else
+				System.out.println("This is no people in the company");	
+		};break;
+		case 3:{
+			worker A=new worker();
+			System.out.println("Workers‘ information");
+			Iterator wr = A.workerlist.iterator();
+			while (wr.hasNext()) {
+			System.out.println(wr.next());
+			}
+			manager B=new manager();
+			System.out.println("Managers‘ information");
+			Iterator mr = B.managerlist.iterator();
+			while (mr.hasNext()) {
+			System.out.println(mr.next());
+			}
+			stockholder C=new stockholder();
+			System.out.println("Stockholders‘ information");
+			Iterator sr = C.stockholderlist.iterator();
+			while (sr.hasNext()) {
+			System.out.println(sr.next());
+			}
+		};break;
+		default:System.out.println("ERROR!");break;	
+		}
+		}while(a!=3);
+	}
+}
