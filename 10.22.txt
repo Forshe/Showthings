@@ -1,0 +1,101 @@
+import java.util.Scanner;
+
+public class Control {
+	public static void main(String[] args) {
+		Scanner cin=new Scanner(System.in);
+		System.out.println("Please input place of departure:");
+		String pe=cin.next();
+		System.out.println("Please input destination:");
+		String des=cin.next();
+		System.out.println("Please input the distance:");
+		int dis=cin.nextInt();
+		Car A=new Car();
+		Highway B=new Highway();
+		Plane C=new Plane();
+		A.Count(dis);
+		B.Count(dis);
+		C.Count(dis);
+		A.Display();
+		B.Display();
+		C.Display();
+	}
+}
+
+abstract class Transport{
+	String TName;
+	int arriveTime;
+	int leaveTime;
+	int getTTime;
+	int securityTime;
+	int waitTime;
+	int Speed;
+	double ticket;
+	abstract public void Count(int distance);
+	public void Display() {};
+}
+
+class Car extends Transport{
+	int allTime;
+	public Car(){
+		TName= "Æû³µ";
+		arriveTime=30;
+		leaveTime=40;
+		getTTime=10;
+		securityTime=0;
+		waitTime=10;
+		Speed=80;
+	}
+	
+	public void Count(int distance) {
+		allTime=arriveTime+leaveTime+getTTime+securityTime+waitTime+distance/Speed;
+	}
+	
+	public void Display() {
+		System.out.print("Transportation:"+TName);
+		System.out.println("The total time:"+allTime);
+	}
+}
+
+class Highway extends Transport{
+	int allTime;
+	public Highway() {
+		TName= "¸ßÌú";
+		arriveTime=20;
+		leaveTime=30;
+		getTTime=5;
+		securityTime=10;
+		waitTime=10;
+		Speed=300;
+	}
+	
+	public void Count(int distance) {
+		allTime=arriveTime+leaveTime+getTTime+securityTime+waitTime+distance/Speed;
+	}
+	
+	public void Display() {
+		System.out.print("Transportation:"+TName);
+		System.out.println("The total time:"+allTime);
+	}
+}
+
+class Plane extends Transport{
+	int allTime;
+	public Plane() {
+		TName= "·É»ú";
+		arriveTime=40;
+		leaveTime=40;
+		getTTime=5;
+		securityTime=20;
+		waitTime=40;
+		Speed=600;
+	}
+	
+	public void Count(int distance) {
+		allTime=arriveTime+leaveTime+getTTime+securityTime+waitTime+distance/Speed;
+	}
+	
+	public void Display() {
+		System.out.print("Transportation:"+TName);
+		System.out.println("The total time:"+allTime);
+	}
+}
