@@ -1,0 +1,25 @@
+SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd");
+List<Date>list=new ArrayList<>(10);
+for(int cnt=0;cnt<10;cnt++) {
+	try {
+		Date date=dateformat.parse("09-12");
+		list.add(date);
+		}
+	catch(ParseException e) {
+		e.printStackTrace();
+		}
+	}
+这一串代码在第一个for循环开始就抛出异常。
+
+SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd");
+List<Date>list=new ArrayList<>(10);
+	try {
+	for(int cnt=0;cnt<10;cnt++) {
+		Date date=dateformat.parse("09-12");
+		list.add(date);
+	catch(ParseException e) {
+		e.printStackTrace();
+		}
+	}
+	}
+这一串代码也在第一此次循环开始就抛出异常。
